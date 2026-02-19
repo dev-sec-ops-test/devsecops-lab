@@ -1,0 +1,12 @@
+database:
+  host: localhost
+  user: admin
+  password: admin123   # Hardcoded secret
+
+server:
+  debug: true          # Debug mode enabled in production
+  port: 80
+
+security:
+  allow_all_origins: true
+  disable_ssl_verification: true

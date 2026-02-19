@@ -1,0 +1,22 @@
+# Using latest tag (bad practice)
+FROM python:latest
+
+# Running as root (security risk)
+USER root
+
+# Hardcoded environment variable
+ENV DB_PASSWORD=admin123
+
+# Copy everything (including secrets)
+COPY . /app
+
+WORKDIR /app
+
+# Install packages without version pinning
+RUN apt-get update && apt-get install -y curl
+
+# Expose unnecessary port
+EXPOSE 22
+
+CMD ["python", "insecure_app.py"]
+
