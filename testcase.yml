@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest # SMELL: Using 'latest' tag instead of a specific version
+    ports:
+      - "5432:5432"
+    environment:
+      # VULNERABILITY: Hardcoded sensitive credentials
+      - POSTGRES_PASSWORD=password123 
+      - POSTGRES_USER=root
+    # VULNERABILITY: Running as privileged/root user
+    privileged: true 
+
+  web-app:
+    build: .
+    ports:
+      - "80:80" # SMELL: Using unencrypted HTTP instead of HTTPS (443)
+    environment:
+      - DEBUG=true # SMELL: Debug mode enabled in a "production" config
+      - API_KEY=AIzaSyA-example-key-12345 # VULNERABILITY: Leaked API Key
