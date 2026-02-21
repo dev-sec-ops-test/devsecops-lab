@@ -20,3 +20,6 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=http://localhost:9000 \
             -Dsonar.token=sqp_50a108a47bea6779a23ecb60bab16fefe5d34e25
+      - name: Build Docker Image
+        run: |
+          docker build -t myapp:latest .
